@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TodoList API Partice</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Oleo+Script:wght@700&display=swap"
+        rel="stylesheet">
+
+    <!-- fontawesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+
+    <!-- mine -->
+    <link rel="stylesheet" href="./style/css/all.css">
+</head>
+
+<body class="singleColorBg">
+    <div class="container logoAndSign">
+        <div class="row">
+            <div class="col-5">
+                <div class="logo-L">
+                    <img src="./img/logo.svg" alt="ONLINE TODO LIST ICON">
+                    <h1>ONLINE TODO LIST</h1>
+                </div>
+                <img src="./img/mainImg.svg" alt="">
+            </div>
+            <div class="col-1">
+
+            </div>
+            <div class="col-4">
+                <h2>最實用的線上代辦事項服務</h2>
+                <form>
+                    <div>
+                        <label for="email">Email</label>
+                        <input type="email" id="email" placeholder="請輸入Email">
+                        <p class="remind"></p>
+                    </div>
+                    <div>
+                        <label for="password">密碼</label>
+                        <input type="password" id="password" placeholder="請輸入密碼">
+                        <p class="remind"></p>
+                    </div>
+                    <input type="submit" value="登入">
+                    <a href="#">註冊帳號</a>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- <div class="todoList">
+        <div class="navbar">
+            <div class="logo-S">
+                <img src="./img/logo.svg" alt="ONLINE TODO LIST ICON">
+                <h1>ONLINE TODO LIST</h1>
+            </div>
+            <div class="infor">
+                <p><span class="userName">王小明</span>的代辦</p>
+                <a href="#" class="logout">登出</a>
+            </div>
+        </div>
+        <div class="content">
+            <div class="addInput card">
+                <input type="text" placeholder="新增待辦事項">
+                <button><i class="fa-solid fa-plus"></i></button>
+            </div>
+            <div class="listSection">
+                <div class="list card">
+                    <ul class="list-tag">
+                        <li href="#" data-statu="all">全部</a>
+                        <li href="#" data-statu="todo">待完成</a>
+                        <li href="#" data-statu="done">已完成</a>
+                    </ul>
+                    <div class="list-content">
+                        <div class="item">
+                            <input type="checkbox" id="item1">
+                            <label for="item1">把冰箱發霉的檸檬拿去丟</label>
+                            <a href="#" class="deleteBtn">X</a>
+                        </div>
+                    </div>
+                    <div class="list-footer">
+                        <p class="todoNum"><span>5</span> 個待完成項目</p>
+                        <a href="#" class="doneAll">完成全部</a>
+                        <a href="#" class="clearBtn">清除已完成項目</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+        <div class="noneItem">
+            <p>目前尚無待辦事項</p>
+            <img src="./img/emptyImg.svg" alt="empty item image">
+        </div>
+    </div> -->
+
+    <script src="./main.js"></script>
+</body>
+
+</html>

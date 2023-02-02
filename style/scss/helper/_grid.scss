@@ -1,0 +1,71 @@
+$gutterWidth: 24px;
+$gridNum: 12;
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-left: -($gutterWidth / 2);
+    margin-right: -($gutterWidth / 2);
+}
+
+%col {
+    position: relative;
+    min-height: 1px;
+    padding-right: $gutterWidth / 2;
+    padding-left: $gutterWidth / 2;
+}
+
+%col-nogutter {
+    padding-right: 0;
+    padding-left: 0;
+}
+
+@for $i from 1 to $gridNum +1 {
+    .col-#{$i} {
+        @extend %col;
+        max-width: 100% * ($i / $gridNum);
+        flex: 0 0 (100% * ($i / $gridNum));
+
+        @include mobile() {
+            max-width: 100%;
+            flex: 0 0 100%;
+        }
+    }
+
+    .no-gutter {
+        margin-left: 0;
+        margin-right: 0;
+
+        .col-#{$i} {
+            @extend %col-nogutter;
+        }
+    }
+}
+
+@for $i from 1 to $gridNum +1 {
+    .col-pc-#{$i} {
+        @include pc {
+            max-width: 100% * ($i / $gridNum);
+            flex: 0 0 (100% * ($i / $gridNum));
+        }
+    }
+}
+
+@for $i from 1 to $gridNum +1 {
+    .col-pad-#{$i} {
+        @include pad {
+            max-width: 100% * ($i / $gridNum);
+            flex: 0 0 (100% * ($i / $gridNum));
+        }
+    }
+}
+
+@for $i from 1 to $gridNum +1 {
+    .col-mob-#{$i} {
+        @include mobile {
+            max-width: 100% * ($i / $gridNum);
+            flex: 0 0 (100% * ($i / $gridNum));
+        }
+    }
+}

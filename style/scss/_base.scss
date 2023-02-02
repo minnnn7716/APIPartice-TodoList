@@ -1,0 +1,39 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+body {
+    font-family: $mainFont;
+    line-height: 1.5;
+    color: $gray_900;
+}
+
+a {
+    display: inline-block;
+    text-decoration: none;
+    color: $gray_900;
+    transition: all ease .3s;
+}
+
+.container {
+    max-width: $max-width;
+    margin: 0 auto;
+    padding-right: $gutterWidth / 2;
+    padding-left: $gutterWidth / 2;
+
+    @include pc {
+        max-width: 1000px;
+    }
+
+    @include pad {
+        max-width: 680px;
+    }
+}
