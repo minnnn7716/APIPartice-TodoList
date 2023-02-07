@@ -110,6 +110,7 @@ function renderList() {
     const listContent = document.querySelector('.list-content');
     const todoNum = document.querySelector('.todoNum span');
     let str = '';
+    let count = 0;
 
     data.forEach(item => {
         if (item.completed_at) {
@@ -125,6 +126,7 @@ function renderList() {
                 `
             }
         } else {
+            count += 1;
             if (tagStatu === 'all' || tagStatu === 'todo') {
                 str += `
                 <li>
@@ -141,7 +143,7 @@ function renderList() {
     });
 
     listContent.innerHTML = str;
-    todoNum.textContent = data.length;
+    todoNum.textContent = count;
 
     itemsClickEvent();
 }
