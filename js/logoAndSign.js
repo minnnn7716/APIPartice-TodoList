@@ -5,7 +5,49 @@ let token;
 let key = {};
 
 checkToken();
-submitClickEvent();
+
+// 監聽按鈕送出「登入 / 註冊」的表單
+(function () {
+    form.addEventListener('submit', e => {
+        e.preventDefault();
+
+        let obj = verifyInput() ? verifyInput() : false;
+
+        if (obj) {
+            if (form.dataset.form === 'sign') signupPost(obj);
+            if (form.dataset.form === 'log') loginPost(obj);
+        }
+    })
+
+    // axios 註冊 api
+    function signupPost(obj) {
+        axios.post(`${apiUrl}/users`, obj)
+            .then(function (res) {
+                localStorage.setItem('token', res.headers.authorization);
+                localStorage.setItem('name', res.data.nickname);
+                alert('註冊成功！將保持登入狀態轉跳至您的待辦清單 ^__^/');
+                checkToken();
+            })
+            .catch(function (error) {
+                console.log(error);
+                alert(error.response.data.error);
+            })
+    }
+
+    // axios 登入 api
+    function loginPost(obj) {
+        axios.post(`${apiUrl}/users/sign_in`, obj)
+            .then(function (res) {
+                localStorage.setItem('token', res.headers.authorization);
+                localStorage.setItem('name', res.data.nickname);
+                alert('登入成功！將保持登入狀態轉跳至您的待辦清單 ^__^/');
+                checkToken();
+            })
+            .catch(function (error) {
+                alert("電子信箱或密碼錯誤。");
+            })
+    }
+})();
 
 // 判斷目前是否登入並切換頁面
 function judgePage() {
@@ -94,24 +136,22 @@ function renderForm(obj) {
     document.querySelector(".userInforInputs").innerHTML = inputStr;
     document.querySelector(".formbtn").innerHTML = btnStr;
 
-    changeFormClickEvent();
-}
+    // 監聽按鈕切換「登入 / 註冊」
+    (function () {
+        let changeFormBtn = document.querySelector('.btn-text');
 
-// 監聽按鈕切換「登入 / 註冊」
-function changeFormClickEvent() {
-    let changeFormBtn = document.querySelector('.btn-text');
+        changeFormBtn.addEventListener('click', e => {
+            e.preventDefault();
 
-    changeFormBtn.addEventListener('click', e => {
-        e.preventDefault();
+            if (e.target.innerHTML === '註冊帳號') {
+                form.dataset.form = 'sign'
+            } else if (e.target.innerHTML === '登入') {
+                form.dataset.form = 'log'
+            }
 
-        if (e.target.innerHTML === '註冊帳號') {
-            form.dataset.form = 'sign'
-        } else if (e.target.innerHTML === '登入') {
-            form.dataset.form = 'log'
-        }
-
-        renderForm(judgeForm());
-    })
+            renderForm(judgeForm());
+        })
+    })();
 }
 
 // 驗證送出的表單欄位是否符合規範
@@ -211,20 +251,6 @@ function verifyInput() {
     return obj;
 }
 
-// 監聽按鈕送出「登入 / 註冊」的表單
-function submitClickEvent() {
-    form.addEventListener('submit', e => {
-        e.preventDefault();
-
-        let obj = verifyInput() ? verifyInput() : false;
-
-        if (obj) {
-            if (form.dataset.form === 'sign') signupPost(obj);
-            if (form.dataset.form === 'log') loginPost(obj);
-        }
-    })
-}
-
 // 登入權限測試
 function checkToken() {
     axios.get(`${apiUrl}/check`, {
@@ -246,34 +272,5 @@ function checkToken() {
             localStorage.removeItem('token');
             localStorage.removeItem('name');
             judgePage();
-        })
-}
-
-// axios 註冊 api
-function signupPost(obj) {
-    axios.post(`${apiUrl}/users`, obj)
-        .then(function (res) {
-            localStorage.setItem('token', res.headers.authorization);
-            localStorage.setItem('name', res.data.nickname);
-            alert('註冊成功！將保持登入狀態轉跳至您的待辦清單 ^__^/');
-            checkToken();
-        })
-        .catch(function (error) {
-            console.log(error);
-            alert(error.response.data.error);
-        })
-}
-
-// axios 登入 api
-function loginPost(obj) {
-    axios.post(`${apiUrl}/users/sign_in`, obj)
-        .then(function (res) {
-            localStorage.setItem('token', res.headers.authorization);
-            localStorage.setItem('name', res.data.nickname);
-            alert('登入成功！將保持登入狀態轉跳至您的待辦清單 ^__^/');
-            checkToken();
-        })
-        .catch(function (error) {
-            alert("電子信箱或密碼錯誤。");
         })
 }
