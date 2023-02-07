@@ -11,96 +11,98 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Oleo+Script:wght@700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Baloo+Thambi+2:wght@700&family=Noto+Sans+TC:wght@400;500;700&display=swap"
         rel="stylesheet">
 
     <!-- fontawesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
 
-    <!-- mine -->
+    <!-- mine style -->
     <link rel="stylesheet" href="./style/css/all.css">
 </head>
 
-<body class="singleColorBg">
-    <div class="container logoAndSign">
-        <div class="row">
+<body class="oneColorBg">
+    <div class="logoAndSign container">
+        <div class="row content-center">
             <div class="col-5">
-                <div class="logo-L">
+                <div class="logo logo-L mb-2 mt-m-6">
                     <img src="./img/logo.svg" alt="ONLINE TODO LIST ICON">
                     <h1>ONLINE TODO LIST</h1>
                 </div>
-                <img src="./img/mainImg.svg" alt="">
+                <img class="modile-none" src="./img/mainImg.svg" alt="">
             </div>
-            <div class="col-1">
+            <div class="col-1 modile-none">
 
             </div>
             <div class="col-4">
-                <h2>最實用的線上代辦事項服務</h2>
-                <form>
-                    <div>
-                        <label for="email">Email</label>
-                        <input type="email" id="email" placeholder="請輸入Email">
-                        <p class="remind"></p>
+                <h2 class="secondaryTitle mb-3 modile-text-center">最實用的線上代辦事項服務</h2>
+                <form name="logoAndSign" data-form="log">
+                    <div class="userInforInputs mb-3">
+                        <!-- <div>
+                            <label for="email">Email</label>
+                            <input type="email" id="email" placeholder="請輸入Email">
+                            <p class="remind">此欄位不可為空</p>
+                        </div> -->
                     </div>
-                    <div>
-                        <label for="password">密碼</label>
-                        <input type="password" id="password" placeholder="請輸入密碼">
-                        <p class="remind"></p>
+                    <div class="formbtn flex flex-column align-center">
+                        <!-- <input class="btn-bg mb-3" type="submit" value="登入">
+                        <a href="#" class="btn-text">註冊帳號</a> -->
                     </div>
-                    <input type="submit" value="登入">
-                    <a href="#">註冊帳號</a>
                 </form>
             </div>
         </div>
     </div>
 
-    <!-- <div class="todoList">
-        <div class="navbar">
-            <div class="logo-S">
+    <div class="todoList container">
+        <div class="navbar flex justify-between">
+            <div class="logo logo-S">
                 <img src="./img/logo.svg" alt="ONLINE TODO LIST ICON">
                 <h1>ONLINE TODO LIST</h1>
             </div>
-            <div class="infor">
-                <p><span class="userName">王小明</span>的代辦</p>
+            <div class="infor flex align-center">
+                <p class="mr-3 modile-none"><span class="userName">王小明</span> 的代辦</p>
                 <a href="#" class="logout">登出</a>
             </div>
         </div>
         <div class="content">
-            <div class="addInput card">
+            <div class="addInput card flex justify-between mb-2">
                 <input type="text" placeholder="新增待辦事項">
-                <button><i class="fa-solid fa-plus"></i></button>
+                <button class="addbtn"><i class="fa-solid fa-plus pointer-none"></i></button>
+            </div>
+            <div class="noitem flex flex-column align-center">
+                <p class="mb-2">目前尚無待辦事項</p>
+                <img src="./img/emptyImg.svg" alt="empty item image">
             </div>
             <div class="listSection">
                 <div class="list card">
                     <ul class="list-tag">
-                        <li href="#" data-statu="all">全部</a>
+                        <li href="#" data-statu="all" class="active">全部</a>
                         <li href="#" data-statu="todo">待完成</a>
                         <li href="#" data-statu="done">已完成</a>
                     </ul>
-                    <div class="list-content">
-                        <div class="item">
-                            <input type="checkbox" id="item1">
-                            <label for="item1">把冰箱發霉的檸檬拿去丟</label>
-                            <a href="#" class="deleteBtn">X</a>
-                        </div>
-                    </div>
+                    <ul class="list-content">
+                        <!-- <li>
+                            <label class="todoItem">
+                                <input type="checkbox">
+                                <span>把冰箱發霉的檸檬拿去丟</span>
+                            </label>
+                            <a href="#" class="deleteBtn"></a>
+                        </li> -->
+                    </ul>
                     <div class="list-footer">
-                        <p class="todoNum"><span>5</span> 個待完成項目</p>
-                        <a href="#" class="doneAll">完成全部</a>
+                        <p class="todoNum"><span>0</span> 個待完成項目</p>
                         <a href="#" class="clearBtn">清除已完成項目</a>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        
-        <div class="noneItem">
-            <p>目前尚無待辦事項</p>
-            <img src="./img/emptyImg.svg" alt="empty item image">
-        </div>
-    </div> -->
-
-    <script src="./main.js"></script>
+    <!-- axios cdn -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.3.1/axios.min.js"></script>
+    <!-- mine js -->
+    <script src="./js/logoAndSign.js"></script>
+    <script src="./js/todoList.js"></script>
 </body>
 
 </html>

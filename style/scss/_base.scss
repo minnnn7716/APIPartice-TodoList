@@ -11,6 +11,7 @@ img {
 }
 
 body {
+    min-height: 100vh;
     font-family: $mainFont;
     line-height: 1.5;
     color: $gray_900;
@@ -20,6 +21,11 @@ a {
     display: inline-block;
     text-decoration: none;
     color: $gray_900;
+}
+
+a,
+button {
+    cursor: pointer;
     transition: all ease .3s;
 }
 

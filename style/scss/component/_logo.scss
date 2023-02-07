@@ -1,0 +1,29 @@
+.logo {
+    display: flex;
+    justify-content: center;
+    font-family: $logoFont;
+
+    img {
+        padding-right: 4px;
+    }
+}
+
+.logo-L {
+    img {
+        width: 40px;
+    }
+
+    h1 {
+        font-size: $h1;
+    }
+}
+
+.logo-S {
+    img {
+        width: 33px;
+    }
+
+    h1 {
+        font-size: $h2;
+    }
+}

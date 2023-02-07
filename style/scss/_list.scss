@@ -1,0 +1,175 @@
+.card {
+    border-radius: 10px;
+    background-color: $white;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.15);
+}
+
+.list-tag {
+    display: flex;
+    cursor: pointer;
+
+    li {
+        flex: 1 1 0;
+        text-align: center;
+        padding: 16px;
+        font-size: $body2;
+        font-weight: 700;
+        color: $gray_600;
+        border-bottom: 2px solid $gray_300;
+        transition: all ease .3s;
+
+        &:hover {
+            color: $gray_900;
+            border-color: $gray_900;
+        }
+    }
+
+    .active {
+        color: $gray_900;
+        border-color: $gray_900;
+    }
+}
+
+.list-content {
+    padding-left: 24px;
+
+    li {
+        position: relative;
+
+        &:hover .deleteBtn {
+            opacity: 1;
+        }
+    }
+}
+
+.deleteBtn {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    top: 50%;
+    right: 12px;
+    transform: translateY(-50%);
+    opacity: 0;
+
+    @include mobile {
+        opacity: 1;
+    }
+
+    &::after,
+    &::before {
+        content: '';
+        position: absolute;
+        width: 1px;
+        height: 20px;
+        top: 20%;
+        left: 48%;
+        background-color: $gray_900;
+    }
+
+    &::after {
+        transform: rotate(45deg);
+    }
+
+    &::before {
+        transform: rotate(-45deg);
+    }
+}
+
+.todoItem {
+    position: relative;
+    user-select: none;
+    display: block;
+    padding-right: 48px;
+    cursor: pointer;
+
+    @include mobile {
+        padding-right: 16px;
+    }
+
+    span {
+        display: block;
+        padding: 16px 0 16px 36px;
+        border-bottom: 1px solid $gray_300;
+        transition: all ease .3s;
+
+        &::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            height: 20px;
+            width: 20px;
+            transform: translateY(-50%) scale(1);
+            border: 1px solid $gray_600;
+            border-radius: 5px;
+            pointer-events: none;
+            transition: all ease .3s;
+        }
+
+        &::after {
+            content: '';
+            position: absolute;
+            top: 28%;
+            left: 4px;
+            height: 20px;
+            width: 10px;
+            transform: rotate(45deg);
+            border-radius: 1px;
+            border-bottom: 3px solid $primary;
+            border-right: 3px solid $primary;
+            pointer-events: none;
+            opacity: 0;
+            transition: all ease .3s;
+        }
+    }
+
+    input {
+        position: absolute;
+        opacity: 0;
+        height: 0;
+        width: 0;
+
+        &:checked {
+            ~span {
+                color: $gray_600;
+                text-decoration: line-through;
+
+                &::before {
+                    border-color: transparent;
+                    transform: translateY(-50%) scale(0);
+                }
+
+                &::after {
+                    opacity: 1;
+                }
+            }
+        }
+    }
+}
+
+.list-footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 24px 48px 24px 24px;
+
+    @include mobile {
+        padding-right: 16px;
+    }
+
+    a {
+        color: $gray_600;
+
+        &:hover {
+            color: $primary_600;
+        }
+    }
+}
+
+.noitem {
+    display: none;
+    padding-top: 60px;
+
+    img {
+        max-width: 240px;
+    }
+}

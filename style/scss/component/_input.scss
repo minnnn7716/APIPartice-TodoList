@@ -1,0 +1,55 @@
+.userInforInputs div {
+    display: flex;
+    flex-direction: column;
+
+    &:not(:last-child) {
+        margin-bottom: 16px;
+    }
+
+    label,
+    .remind {
+        font-size: $body2;
+        font-weight: 700;
+    }
+
+    label {
+        margin-bottom: 4px;
+    }
+
+    input {
+        padding: 12px 16px;
+        border-radius: 10px;
+        font-size: $body1;
+        border: 2px solid #d8745500;
+        transition: all ease .3s;
+
+        &::placeholder {
+            color: $gray_600;
+        }
+    }
+
+    .remind {
+        max-height: 0;
+        margin-top: 4px;
+        color: $accent;
+        overflow: hidden;
+        transition: all ease .3s;
+    }
+}
+
+.userInforInputs .errorInput {
+    border: 2px solid #d87455;
+
+    &~.remind {
+        max-height: 20px;
+    }
+}
+
+.addInput {
+    padding: 4px 4px 4px 16px;
+
+    input {
+        width: 100%;
+        font-size: $body1;
+    }
+}

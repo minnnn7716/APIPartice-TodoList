@@ -1,0 +1,33 @@
+.flex {
+    display: flex;
+}
+
+.flex-column {
+    flex-direction: column;
+}
+
+.align-center {
+    align-items: center;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.justify-between {
+    justify-content: space-between;
+}
+
+.pointer-none {
+    pointer-events: none;
+}
+
+@include mobile {
+    .modile-none {
+        display: none;
+    }
+
+    .modile-text-center {
+        text-align: center;
+    }
+}

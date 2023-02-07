@@ -1,0 +1,52 @@
+.oneColorBg {
+    background-color: $primary;
+}
+
+.twoColorsBg {
+    background: linear-gradient(172.7deg,
+            #FFD370 0%,
+            #FFD370 53.44%,
+            #FFFFFF 53.45%,
+            #FFFFFF 100%);
+}
+
+.content-center {
+    min-height: 100vh;
+    align-items: center;
+
+    @include mobile {
+        min-height: auto;
+    }
+}
+
+.secondaryTitle {
+    font-size: $h2;
+    font-weight: 700;
+}
+
+.navbar {
+    padding: 16px 32px 40px 32px;
+    font-size: $body1;
+
+    @include mobile {
+        padding: 16px 0 16px 0;
+    }
+
+    p {
+        font-weight: 700;
+    }
+
+    a:hover {
+        font-weight: 500;
+        color: $accent;
+    }
+}
+
+.todoList {
+    display: none;
+
+    .content {
+        max-width: 500px;
+        margin: 0 auto 64px auto;
+    }
+}
