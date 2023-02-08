@@ -138,16 +138,16 @@ function renderList() {
     let str = '';
     let count = 0;
 
-    data.forEach(item => {
+    data.forEach((item, index) => {
         if (item.completed_at) {
             if (tagStatu === 'all' || tagStatu === 'done') {
                 str += `
                 <li>
-                    <label class="todoItem">
+                    <label class="todoItem" data-num="${index}">
                         <input type="checkbox" checked>
                         <span class="pointer-none">${item.content}</span>
                     </label>
-                <a href="#" class="deleteBtn"></a>
+                <a href="#" class="deleteBtn" data-num="${index}"></a>
                 </li>
                 `
             }
@@ -156,11 +156,11 @@ function renderList() {
             if (tagStatu === 'all' || tagStatu === 'todo') {
                 str += `
                 <li>
-                    <label class="todoItem">
+                    <label class="todoItem" data-num="${index}">
                         <input type="checkbox">
                         <span class="pointer-none">${item.content}</span>
                     </label>
-                <a href="#" class="deleteBtn"></a>
+                <a href="#" class="deleteBtn" data-num="${index}"></a>
                 </li>
                 `
             }
@@ -179,9 +179,10 @@ function itemsClickEvent() {
     const items = document.querySelectorAll('.list-content li');
     const inputs = document.querySelectorAll('.todoItem input');
 
-    items.forEach((item, index) => {
+    items.forEach(item => {
         item.addEventListener('click', e => {
             e.preventDefault();
+            let index = e.target.dataset.num;
             let id = data[index].id;
 
             if (e.target.getAttribute('class') === 'deleteBtn') {
@@ -225,9 +226,8 @@ function deleteManyItem(ary) {
 
 // axios 切換 todo 狀態 api
 function changeItemStatu(id) {
-    axios.patch(`${apiUrl}/todos/${id}/toggle`, key)
+    axios.patch(`${apiUrl}/todos/${id}/toggle`, {}, key)
         .then(function (res) {
-            console.log(res);
         })
         .catch(function (error) {
             console.log(error);
