@@ -25,7 +25,6 @@ let key = {};
                 .then(function (res) {
                     localStorage.setItem('token', res.headers.authorization);
                     localStorage.setItem('name', res.data.nickname);
-                    console.log(res.headers.authorization)
                     alert('註冊成功！將保持登入狀態轉跳至您的待辦清單 ^__^/');
                     checkToken();
                 })
@@ -170,6 +169,7 @@ function verifyInput() {
     // 若未給予空字串，在尚未通過驗證寫入資料前，206 行會報錯，因無法針對 undefined 的值使用 trim()
     let loginPassword = "";
     let comfirmPassword = "";
+    let nickname = "";
 
     // 驗證規則
     let verifyObj = {
@@ -190,6 +190,7 @@ function verifyInput() {
                     return `長度需大於 ${this.minlength}`;
                 }
 
+                nickname = input;
                 return true;
             }
         },
@@ -247,7 +248,7 @@ function verifyInput() {
         obj = {
             "user": {
                 "email": form['email'].value,
-                "nickname": form['nickname'].value,
+                "nickname": nickname,
                 "password": comfirmPassword
             }
         }
@@ -257,6 +258,7 @@ function verifyInput() {
         if (!value.trim()) return false;
     }
 
+    console.log(obj)
     return obj;
 }
 
