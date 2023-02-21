@@ -2,8 +2,21 @@
 let data;
 let tagStatu = 'all';
 
+// axios 取得 todos api
+function getList() {
+    axios.get(`${apiUrl}/todos`, key)
+        .then(function (res) {
+            data = res.data.todos;
+            bindEvent();
+            renderList();
+        })
+        .catch(function (error) {
+            console.log(error);
+        })
+}
+
 // 監聽按鈕「登出」，並切換頁面與清除登入資訊
-(function () {
+function eventForLogout() {
     const logout = document.querySelector('.logout');
     logout.addEventListener('click', e => signoutDelete(e));
 
@@ -22,93 +35,87 @@ let tagStatu = 'all';
                 alert('登出失敗');
             })
     }
-})();
+}
 
+// 監聽「新增 todo」按鈕點擊、鍵盤 Enter
+function eventForAdd() {
+    const input = document.querySelector('.addInput input');
+    const addbtn = document.querySelector('.addbtn');
+    let obj;
 
-// axios 取得 todos api
-function getList() {
-    axios.get(`${apiUrl}/todos`, key)
-        .then(function (res) {
-            data = res.data.todos;
-            renderList();
+    addbtn.addEventListener('click', e => {
+        e.preventDefault();
 
-            // 監聽「新增 todo」按鈕點擊、鍵盤 Enter
-            (function () {
-                const input = document.querySelector('.addInput input');
-                const addbtn = document.querySelector('.addbtn');
-                let obj;
+        if (!input.value.trim().length) {
+            alert('待辦事項不得為空');
+            return;
+        }
 
-                addbtn.addEventListener('click', e => {
-                    e.preventDefault();
+        obj = {
+            "todo": {
+                "content": input.value
+            }
+        }
 
-                    if (!input.value.trim().length) {
-                        alert('待辦事項不得為空');
-                        return;
-                    }
+        postItem(obj);
+    })
 
-                    obj = {
-                        "todo": {
-                            "content": input.value
-                        }
-                    }
+    input.addEventListener('keydown', e => {
+        if (e.key === 'Enter') {
+            if (!input.value.trim().length) {
+                alert('待辦事項不得為空');
+                return;
+            }
 
-                    postItem(obj);
-                })
+            obj = {
+                "todo": {
+                    "content": input.value
+                }
+            }
 
-                input.addEventListener('keydown', e => {
-                    if (e.key === 'Enter') {
-                        if (!input.value.trim().length) {
-                            alert('待辦事項不得為空');
-                            return;
-                        }
+            addbtn.style.backgroundColor = '#9F9A91';
+            setTimeout(() => { addbtn.style.backgroundColor = '#333333' }, 500);
+            postItem(obj);
+        }
+    })
+}
 
-                        obj = {
-                            "todo": {
-                                "content": input.value
-                            }
-                        }
+// 切換完成狀態 tag
+function eventForTag() {
+    const tagslist = document.querySelector('.list-tag');
+    const tags = document.querySelectorAll('.list-tag li');
 
-                        addbtn.style.backgroundColor = '#9F9A91';
-                        setTimeout(() => { addbtn.style.backgroundColor = '#333333' }, 500);
-                        postItem(obj);
-                    }
-                })
-            })();
-
-            // 切換完成狀態 tag
-            (function () {
-                const tagslist = document.querySelector('.list-tag');
-                const tags = document.querySelectorAll('.list-tag li');
-
-                tagslist.addEventListener('click', e => {
-                    tags.forEach(item => {
-                        item.classList.remove('active');
-                        e.target.classList.add('active');
-                    })
-
-                    tagStatu = e.target.dataset.statu;
-                    renderList();
-                })
-            })();
-
-            // 監聽「清除已完成項目」按鈕
-            (function () {
-                const clearBtn = document.querySelector('.clearBtn');
-
-                clearBtn.addEventListener('click', e => {
-                    e.preventDefault();
-                    donelist = [];
-
-                    data.filter(item => item.completed_at ? donelist.push(item.id) : false);
-                    data = data.filter(item => item.completed_at !== true);
-
-                    deleteManyItem(donelist);
-                })
-            })();
+    tagslist.addEventListener('click', e => {
+        tags.forEach(item => {
+            item.classList.remove('active');
+            e.target.classList.add('active');
         })
-        .catch(function (error) {
-            console.log(error);
-        })
+
+        tagStatu = e.target.dataset.statu;
+        renderList();
+    })
+}
+
+// 監聽「清除已完成項目」按鈕
+function eventForClear() {
+    const clearBtn = document.querySelector('.clearBtn');
+
+    clearBtn.addEventListener('click', e => {
+        e.preventDefault();
+        donelist = [];
+
+        data.filter(item => item.completed_at ? donelist.push(item.id) : false);
+        data = data.filter(item => item.completed_at !== true);
+
+        deleteManyItem(donelist);
+    })
+}
+
+function bindEvent() {
+    eventForLogout();
+    eventForAdd();
+    eventForTag();
+    eventForClear();
 }
 
 // axios 新增 todo api
@@ -211,17 +218,17 @@ function deleteItem(id, index) {
 
 // axios 連續執行刪除 todo api
 function deleteManyItem(ary) {
-    ary.forEach(id => {
-        axios.delete(`${apiUrl}/todos/${id}`, key)
-            .then(function (res) {
-                console.log(res);
-            })
-            .catch(function (error) {
-                console.log(error);
-            })
-    });
+    let newAry = ary.map(id => axios.delete(`${apiUrl}/todos/${id}`, key));
 
-    renderList();
+    Promise.all(newAry)
+        .then((res) => {
+            console.log(res);
+            alert('已清除完成項目！');
+            renderList();
+        })
+        .catch((error) => {
+            console.log(error);
+        })
 }
 
 // axios 切換 todo 狀態 api
