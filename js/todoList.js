@@ -225,17 +225,21 @@ function deleteItem(id, index) {
 
 // axios 連續執行刪除 todo api
 function deleteManyItem(ary) {
-    let newAry = ary.map(id => axios.delete(`${apiUrl}/todos/${id}`, key));
+    if (ary.length) {
+        let newAry = ary.map(id => axios.delete(`${apiUrl}/todos/${id}`, key));
 
-    Promise.all(newAry)
-        .then((res) => {
-            console.log(res);
-            alert('已清除完成項目！');
-            renderList();
-        })
-        .catch((error) => {
-            console.log(error);
-        })
+        Promise.all(newAry)
+            .then((res) => {
+                console.log(res);
+                alert('已清除完成項目！');
+                renderList();
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+    } else {
+        alert('沒有已完成項目！');
+    }
 }
 
 // axios 切換 todo 狀態 api
