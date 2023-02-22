@@ -589,6 +589,11 @@ input:focus {
 .btn-text {
   font-size: 1rem;
   font-weight: 700;
+  transition: all ease 0.5s;
+}
+
+.btn-text:hover {
+  color: black;
 }
 
 .btn-bg {
@@ -596,6 +601,10 @@ input:focus {
   border-radius: 10px;
   background-color: #333333;
   color: #ffffff;
+  cursor: pointer;
+}
+.btn-bg:hover {
+  background-color: #000000;
 }
 
 .addbtn {

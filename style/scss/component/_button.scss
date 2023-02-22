@@ -2,6 +2,11 @@
 .btn-text {
     font-size: $body1;
     font-weight: 700;
+    transition: all ease .5s;
+}
+
+.btn-text:hover {
+    color: black;
 }
 
 .btn-bg {
@@ -9,6 +14,11 @@
     border-radius: 10px;
     background-color: $gray_900;
     color: $white;
+    cursor: pointer;
+
+    &:hover {
+        background-color: $black;
+    }
 }
 
 .addbtn {
