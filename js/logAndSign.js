@@ -18,35 +18,37 @@ let key = {};
                 if (form.dataset.form === 'log') loginPost(obj);
             }
         })
+    }
 
-        // axios 註冊 api
-        function signupPost(obj) {
-            axios.post(`${apiUrl}/users`, obj)
-                .then(function (res) {
-                    localStorage.setItem('token', res.headers.authorization);
-                    localStorage.setItem('name', res.data.nickname);
-                    alert('註冊成功！將保持登入狀態轉跳至您的待辦清單 ^__^/');
-                    checkToken();
-                })
-                .catch(function (error) {
-                    console.log(error);
-                    alert(error.response.data.error);
-                })
-        }
+    // axios 註冊 api
+    function signupPost(obj) {
+        axios.post(`${apiUrl}/users`, obj)
+            .then(function (res) {
+                localStorage.setItem('token', res.headers.authorization);
+                localStorage.setItem('name', res.data.nickname);
+                alert('註冊成功！將保持登入狀態轉跳至您的待辦清單 ^__^/');
+                // 在登入時先將表單狀態切回 log，以免登出時初始畫面是註冊
+                form.dataset.form = 'log';
+                checkToken();
+            })
+            .catch(function (error) {
+                console.log(error);
+                alert(error.response.data.error);
+            })
+    }
 
-        // axios 登入 api
-        function loginPost(obj) {
-            axios.post(`${apiUrl}/users/sign_in`, obj)
-                .then(function (res) {
-                    localStorage.setItem('token', res.headers.authorization);
-                    localStorage.setItem('name', res.data.nickname);
-                    alert('登入成功！將保持登入狀態轉跳至您的待辦清單 ^__^/');
-                    checkToken();
-                })
-                .catch(function (error) {
-                    alert("電子信箱或密碼錯誤。");
-                })
-        }
+    // axios 登入 api
+    function loginPost(obj) {
+        axios.post(`${apiUrl}/users/sign_in`, obj)
+            .then(function (res) {
+                localStorage.setItem('token', res.headers.authorization);
+                localStorage.setItem('name', res.data.nickname);
+                alert('登入成功！將保持登入狀態轉跳至您的待辦清單 ^__^/');
+                checkToken();
+            })
+            .catch(function (error) {
+                alert("電子信箱或密碼錯誤。");
+            })
     }
 
     function init() {
@@ -145,7 +147,7 @@ function renderForm(obj) {
     document.querySelector(".formbtn").innerHTML = btnStr;
 
     // 監聽按鈕切換「登入 / 註冊」
-    (function () {
+    (function eventForSwitchForm() {
         let changeFormBtn = document.querySelector('.btn-text');
 
         changeFormBtn.addEventListener('click', e => {

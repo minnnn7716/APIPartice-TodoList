@@ -7,22 +7,23 @@ let tagStatu = 'all';
     function eventForLogout() {
         const logout = document.querySelector('.logout');
         logout.addEventListener('click', e => signoutDelete(e));
+    }
 
-        function signoutDelete(e) {
-            e.preventDefault();
+    // axios 登出 api
+    function signoutDelete(e) {
+        e.preventDefault();
 
-            axios.delete(`${apiUrl}/users/sign_out`, key)
-                .then(function (res) {
-                    alert('登出成功！');
+        axios.delete(`${apiUrl}/users/sign_out`, key)
+            .then(function (res) {
+                alert('登出成功！');
 
-                    localStorage.removeItem('token');
-                    localStorage.removeItem('name');
-                    judgePage();
-                })
-                .catch(function (error) {
-                    alert('登出失敗');
-                })
-        }
+                localStorage.removeItem('token');
+                localStorage.removeItem('name');
+                judgePage();
+            })
+            .catch(function (error) {
+                alert('登出失敗');
+            })
     }
 
     // 監聽「新增 todo」按鈕點擊、鍵盤 Enter
